@@ -1,0 +1,78 @@
+/*
+Given an array full of integers and a target integer, there is 
+one sum inside of the array that will equal the target integer.
+Create a function that will be able to find that sum inside of 
+the array, and return an array with the indeces of those two sum
+integers found inside of the array
+*/
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+    
+    int solution[] = {0,0};
+    for (int i = 0; i < nums.length; i++){
+        if(nums[i] > target){
+            int find = target-nums[i];
+            for(int j = i+1; j < nums.length;j++){
+                if(nums[j] == find){
+                    solution[0] = i;
+                    solution[1] = j;
+                    return solution;
+                }
+                else{
+                    continue;
+                    }
+                }
+            }
+        else if (nums[i] == target){
+            for (int j = i+1; j < nums.length;j++){
+                if(nums[j] == 0){
+                    solution[0] = i;
+                    solution[1] = j;
+                    return solution;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+        else if(nums[i] < target){
+            int find = target-nums[i];
+            for(int j = i+1; j < nums.length;j++){
+                if(nums[j] == find){
+                    solution[0] = i;
+                    solution[1] = j;
+                    return solution;
+                }
+                else{
+                    continue;
+                    }
+                }
+            }
+        }
+        return solution;
+    }
+}
+
+//Can you come up with a solution that's not O(N^2)?
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> referenceMap = new LinkedHashMap<>();
+        int find;
+        int solution[] = {0,0};
+        for(int i = 0; i < nums.length; i++){
+            referenceMap.put(nums[i],i);
+        }
+        for(int j = 0; j < nums.length; j++){
+            find = target - nums[j];
+            if((referenceMap.get(find) != null) && (referenceMap.get(find) != j)) {
+                solution[0] = j;
+                System.out.println(referenceMap.get(find));
+                solution[1] = referenceMap.get(find);
+                return solution;
+            }
+                continue;
+                }
+            return solution;
+            }
+        }
