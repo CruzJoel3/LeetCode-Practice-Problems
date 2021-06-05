@@ -1,0 +1,66 @@
+/*
+Given two LinkedLists, who's entries are reversed,
+add the values in each node and return a LinkedList
+with it's own entries the result of that addition
+
+You are given two non-empty linked lists representing 
+two non-negative integers. The digits are stored in reverse 
+order, and each of their nodes contains a single digit. Add 
+the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ 
+ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    //This creates a LinkedList with a head integer value of 0
+    ListNode dummyHead = new ListNode(0);
+    ListNode p = l1;
+    ListNode q = l2;
+    
+    //This is a LinkedList with only a head value of 0
+    ListNode curr = dummyHead;
+    int carry = 0;
+    while (p != null || q != null) {
+        //On any given iteration, this makes sure that we haven't reached the end of the List
+        //If we are at the end, then we make the integer value 0
+        //If we aren't at the end, then we make the integer the integer value of the node we're at
+        int x = (p != null) ? p.val : 0;
+        int y = (q != null) ? q.val : 0;
+        
+        //This add's the carry value, and the two node values that we're at 
+        int sum = carry + x + y;
+        
+        //If the sum is two-digits, we set the carry to 1 (can only be 1 or 0)
+        carry = sum / 10;
+        
+        //This adds the addition of our current two nodes to our result LinkedList
+        //making sure that the node only keeps single digit values inside of it
+        curr.next = new ListNode(sum % 10);
+        
+        //This places our LinkedList at the next node in our addition
+        curr = curr.next;
+        
+        //This makes sure that we are iterating through each node, and if we reach the end
+        //it's identified at the while loop
+        if (p != null) p = p.next;
+        if (q != null) q = q.next;
+    }
+    
+    //If we end the addition at a carry = 1 scenario, we add that to the end of the LinkedList 
+    //who's keeping up with the added nodes 
+    if (carry > 0) {
+        curr.next = new ListNode(carry);
+    }
+    return dummyHead.next;
+}
