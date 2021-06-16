@@ -24,3 +24,7 @@ class Solution {
 }
 
 //Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
+
+*You just do 1 for loop from 0 to n and keep track of one sum which is the sum of all elements and 
+another sum which us the sum of all indices + 1 since the indices will be from 0 through n-1. Then subtract
+the two numbers, and that'll tell you what you're missing from the array*
