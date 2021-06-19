@@ -1,0 +1,47 @@
+/*
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+*/
+
+class Solution {
+    int maxProfit(int[] prices) {
+        int currentValue = 0;
+        int currentDifference = 0;
+        int maxProfit = 0;
+        int counter = 0;
+        
+        if(prices.length == 0 || prices.length == 1){
+            return 0;
+        }
+        
+        for(int j = 1; j < prices.length; j++){
+            counter++;
+            if(prices[j-1] < prices[j]){
+                currentValue = prices[j-1];
+                break;
+            }
+            if(prices.length-1 == counter){
+                return 0;
+            }
+        }
+        
+        for(int i = counter; i < prices.length;i++){
+            if(prices[i] < currentValue){
+                currentValue = prices[i];
+            }
+            else{
+                currentDifference = prices[i] - currentValue;
+            }
+            if(maxProfit < currentDifference){
+                maxProfit = currentDifference;
+            }
+            
+        }
+        return maxProfit;
+    }
+}
