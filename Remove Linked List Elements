@@ -1,0 +1,64 @@
+/*
+Given a linked list and a value, remove that value from the 
+linked list for EVERY time that it comes up in the LinkedList 
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if(head == null){
+            return null;
+        }
+        if(head.next == null){
+            if(head.val == val){
+                return null;
+            }
+            return head;
+        }
+        
+        ListNode oneBehind = new ListNode(head.val);
+        while(head.val == val){
+            if(head.next!=null){
+                head = head.next;
+                oneBehind.val = head.val;
+            }
+            else{
+                return null;
+            }
+        }
+        ListNode answer = oneBehind;
+                
+        while(head.next != null){
+            if(head.val != val){
+                oneBehind.val = head.val;
+                if(head.next.val == val && head.next.next==null){
+                    return answer;
+                }
+                    oneBehind.next = new ListNode(head.next.val);
+                    oneBehind = oneBehind.next;
+                    head = head.next;
+            }
+            else{
+                head = head.next;
+            }
+            if(head.next==null && head.val!=val){
+                oneBehind.val=head.val;
+            }
+        }
+        if(answer.val == val){
+            return null;
+        }
+        else{
+            return answer;
+        }
+    }
+}
