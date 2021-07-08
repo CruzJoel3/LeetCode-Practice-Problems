@@ -1,0 +1,52 @@
+/*
+Provided a Binary Tree, find a path whose sum equals up to the value
+of a passed in integer. If no path sum in the tree provides us with 
+our desired value, return false
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    boolean pathsum(TreeNode root,int sum,int target){
+        if(root==null){
+            return false;
+        } 
+        System.out.println("Sum before addition");
+        sum+=root.val;
+        System.out.println("Sum after addition");
+        if(root.left==null && root.right==null){
+            if(sum==target){
+               return true; 
+            } 
+            return false;
+        }
+        boolean l=false;
+        boolean r=false;
+        if(root.left!=null){
+            l=pathsum(root.left,sum,target);
+        }
+        if(root.right!=null){
+            r=pathsum(root.right,sum,target);
+        } 
+        if(l==true || r==true){
+            return true;
+        } 
+        return false;
+    }
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        return pathsum(root,0,targetSum);   
+    }
+}
