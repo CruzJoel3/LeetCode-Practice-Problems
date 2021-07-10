@@ -20,33 +20,20 @@ our desired value, return false
  * }
  */
 class Solution {
-    boolean pathsum(TreeNode root,int sum,int target){
-        if(root==null){
-            return false;
-        } 
-        System.out.println("Sum before addition");
-        sum+=root.val;
-        System.out.println("Sum after addition");
-        if(root.left==null && root.right==null){
-            if(sum==target){
-               return true; 
-            } 
-            return false;
-        }
-        boolean l=false;
-        boolean r=false;
-        if(root.left!=null){
-            l=pathsum(root.left,sum,target);
-        }
-        if(root.right!=null){
-            r=pathsum(root.right,sum,target);
-        } 
-        if(l==true || r==true){
-            return true;
-        } 
-        return false;
-    }
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        return pathsum(root,0,targetSum);   
+        return dfs(root, 0, targetSum);
+}
+    public boolean dfs(TreeNode root,int sum, int targetSum){
+        if(root == null){
+            return false;
+        }
+        sum = sum + root.val;
+        System.out.println("Value of Current Sum = " + sum);
+        if(root.left == null && root.right == null){
+            if(sum == targetSum){
+                return true;
+            }
+        }
+        return dfs(root.left, sum, targetSum) || dfs(root.right, sum, targetSum);
     }
 }
