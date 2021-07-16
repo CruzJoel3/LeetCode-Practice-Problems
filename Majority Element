@@ -1,0 +1,22 @@
+/*
+Return the VALUE of the element in an array that shows up the most
+*/
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> counterMap = new LinkedHashMap<>();
+        int indexOfRepeat = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(counterMap.get(nums[i]) != null){
+                counterMap.replace(nums[i], counterMap.get(nums[i])+1);
+                if(counterMap.get(nums[i]) > indexOfRepeat){
+                    indexOfRepeat = i;
+                }
+            }
+            else{
+                counterMap.put(nums[i],1);
+            }
+        }
+        return nums[indexOfRepeat];
+    }
+}
