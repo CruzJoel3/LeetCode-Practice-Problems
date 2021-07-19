@@ -1,0 +1,5 @@
+/*
+Create an array where each element of the answer array is the product of all
+the elements of the input array, except the element in the input array that
+lies in the same index of the element we're populating in the answer array
+*/
