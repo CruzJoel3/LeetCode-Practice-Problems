@@ -1,0 +1,35 @@
+/*
+Given a matrixx with elements being 1's or 0's, any element where there's a zero,
+make every element in that row and column all 0's. The matrixx can have several rows
+where there's a 0 somewhere in a row, and each row can have several columns with a 0
+inside of it.
+*/
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int columnNumbers[] = new int [matrix[0].length];
+        int rowNumbers[] = new int [matrix.length];
+        int i = 0;
+        int j = 0;
+        for(i = 0; i < matrix.length; i++){
+            for(j = 0; j < matrix[i].length;j++){
+                if(matrix[i][j] == 0){
+                    rowNumbers[i] = 1;
+                    columnNumbers[j] = 1;
+                }
+            }
+            j = 0;
+        }
+        for(i = 0; i < matrix.length; i++){
+            for(j = 0; j < matrix[i].length;j++){
+                if(rowNumbers[i] == 1){
+                    matrix[i][j] = 0;
+                }
+                if(columnNumbers[j] == 1){
+                    matrix[i][j] = 0;
+                }
+            }
+            j = 0;
+        }
+    }
+}
