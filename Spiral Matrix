@@ -1,0 +1,48 @@
+/*
+Given an m x n matrix, return an array with the order being the 
+clockwise spiral order of the matrix
+*/
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> answerArray = new ArrayList<>();
+        int rowCounter = 0;
+        int lastRowCounter = 0;
+        int backWardsCounter = matrix[0].length-2;
+        //First row
+        //Last column
+        //Last row backwards, from second to last element to beginning of row
+        //Middle row, from first element to second to last element 
+        for(int i = 0; i < (matrix.length*matrix[0].length); i++){
+            if(i <= matrix[0].length-1){
+                answerArray.add(matrix[rowCounter][i]);
+                if(i == matrix[0].length-1){
+                    rowCounter++;
+                }
+            }
+            else if(i >= matrix[0].length && i <= matrix[0].length + (matrix.length-2)){
+                answerArray.add(matrix[rowCounter][matrix[0].length-1]);
+                if(i < matrix[0].length + (matrix.length-2)){
+                    rowCounter++;
+                }
+            }
+            else if(i >= (matrix[0].length + (matrix.length-1)) && i <= (matrix[0].length + matrix[0].length)){
+                answerArray.add(matrix[rowCounter][backWardsCounter--]);
+                if(i == (matrix[0].length + matrix[0].length)){
+                    rowCounter--;
+                }
+            }
+            else if(i >= (matrix[0].length + matrix[0].length + 1)){
+                answerArray.add(matrix[rowCounter][lastRowCounter++]);
+            }
+        }
+        return answerArray;
+    }
+}
+
+/*
+Note: This solution only works for a 3x3 matrix. For any sized matrix, I suggest making a secondary method that can take 
+a matrix of a certain size and solve its perimeter spiral, then we send in the remaining inside perimeter into this same 
+method to find the spiral of that inside as well. Keep sending in smaller versions of the matrix in order to complete our
+answer array
+*/
