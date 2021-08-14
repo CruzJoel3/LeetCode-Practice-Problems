@@ -1,0 +1,42 @@
+/*
+Given an array, output all of the possible arrangements of the elements of the array 
+*/
+
+class Solution {
+    List<List<Integer>> answerList = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+    List<Integer> holdingList = new ArrayList<>();
+    for(int j = 0; j < nums.length; j++){
+        holdingList.add(nums[j]);
+    }    
+    backtracking(holdingList,new ArrayList<>(), 0);
+    return answerList;
+        
+    }
+        
+    public void backtracking(List<Integer> originalList, List<Integer> changingList, int counter){
+        int i;
+        if(originalList.size() == 0){
+            answerList.add(new ArrayList<Integer>(changingList));
+            System.out.println("Answer List: " + answerList);
+            return;
+        }
+        for(i = 0; i < originalList.size(); i++){
+            if(counter > 0){
+                changingList.add(originalList.get(i));
+                originalList.remove(i); 
+            }
+            System.out.println("i before recursion: " + i);
+            System.out.println("Growing array: " + changingList + " original array: " + originalList);
+            backtracking(originalList, changingList, 1);
+            System.out.println("i after return: " + i);
+            if(changingList.size() == 0){
+                return;
+            }
+            originalList.add(i,changingList.get(changingList.size()-1));
+            changingList.remove(changingList.size()-1);
+        }
+        System.out.println("After stack drop -> Growing array: " + changingList + " original array: " + originalList);
+    }
+        
+}
