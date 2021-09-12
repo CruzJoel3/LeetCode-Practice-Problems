@@ -1,0 +1,59 @@
+/*
+You're given an array full of ASCENDING SORTED numbers (coins), and an integer value. Assuming
+you can use each array element (coin) as much as you want, determine the least amount coins you'd
+need to add up to the passed in integer value.
+
+If there is no combination of coins that can add up to the integer value, return -1
+*/
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int dp[] = new int[amount];
+        int additionHolder = 0;
+        int currentSizeCounter = 0;
+        HashMap<Integer,Integer> joelMap = new LinkedHashMap<>();
+        
+        for(int i = 0; i < coins.length; i++){
+            joelMap.put(coins[i],0);
+        }
+        if(joelMap.get(amount) != null){
+            return 1;
+        }
+        if(amount == 0){
+            return 0;
+        }
+        for(int k = coins.length-1; k >= 0 ; k--){
+            if(coins[k] > amount && coins.length!=1){
+                continue;
+            }
+            else if(coins[k] > amount && coins.length==1){
+                return -1;
+            }
+           else{
+               while(additionHolder <= amount){
+                   additionHolder = additionHolder + coins[k];
+                   currentSizeCounter++;
+                }
+               if(additionHolder == amount){
+                   break;
+               }
+               else if(additionHolder > amount){
+                   additionHolder = additionHolder - coins[k];
+                   currentSizeCounter--;
+               }
+                if(joelMap.get(amount-additionHolder) != null){
+                    currentSizeCounter++;
+                    break;
+                }
+            }
+            if(k == 0 && additionHolder!=amount){
+                currentSizeCounter = -1;
+            }
+        }
+        return currentSizeCounter;
+    }
+}
+
+****************************************************************************************
+//What about if you need a solution that will work for an array of randomly arranged coins, 
+and they're not in ascending order
