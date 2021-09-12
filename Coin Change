@@ -8,7 +8,6 @@ If there is no combination of coins that can add up to the integer value, return
 
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        int dp[] = new int[amount];
         int additionHolder = 0;
         int currentSizeCounter = 0;
         HashMap<Integer,Integer> joelMap = new LinkedHashMap<>();
